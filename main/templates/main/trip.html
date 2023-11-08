@@ -1,0 +1,17 @@
+<h2>{{ trip.destination }}</h2>
+<p>{{ trip.description }}</p>
+
+<!-- Like/Unlike button -->
+{% if user in trip.liked_by.all %}
+    <a href="{% url 'unlike_trip' trip.id %}">Unlike</a>
+{% else %}
+    <a href="{% url 'like_trip' trip.id %}">Like</a>
+{% endif %}
+
+<!-- List of users who have liked this trip -->
+<h3>Users who like this trip:</h3>
+<ul>
+{% for user in trip.liked_by.all %}
+    <li>{{ user.username }}</li>
+{% endfor %}
+</ul>

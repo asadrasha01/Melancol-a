@@ -10,6 +10,8 @@
 
     <main>
         {% block content %}{% endblock %}
+        <a href="{% url 'search_result' %}">Search</a>
+        <a href="{% url 'follow_user' user.id %}">Follow</a>
     </main>
 
     <footer>
