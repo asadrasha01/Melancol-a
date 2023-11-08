@@ -65,7 +65,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
         },
-        'APP_DIRS': True,
+        'DIRS': [BASE_DIR / 'main/templates'],
     },
 ]
 
