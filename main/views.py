@@ -1,29 +1,30 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, logout
-from .forms import RegistrationForm, LoginForm
+from .forms import RegisterForm, LoginForms
 
 def register(request):
     if request.method == 'POST':
-        form = RegistrationForm(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('profile')  # Redirect to user profile page
     else:
-        form = RegistrationForm()
+        form = RegisterForm()
     return render(request, 'main/register.html', {'form': form})
 
-def login_view(request):
+def sign_in(request):
     if request.method == 'POST':
-        form = LoginForm(data=request.POST)
+        form = LoginForms(request.POST)
         if form.is_valid():
-            user = form.get_user()
-            login(request, user)
+            # Process the login form
             return redirect('profile')  # Redirect to user profile page
     else:
-        form = LoginForm()
+        form = LoginForms()
     return render(request, 'main/login.html', {'form': form})
 
-def logout_view(request):
+def sign_out(request):
     logout(request)
-    return redirect('login')  # Redirect to login page after logout
+    return redirect('home')
+
+def home(request):
+    return render(request, 'main/home.html')
